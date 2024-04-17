@@ -9,6 +9,18 @@ myLibrary.push(b3);
 
 const cards = document.querySelector('.cards');
 
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("#addnew");
+const closeButton = document.querySelector("#close");
+
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
+
 function Book(index, title, author, pages, read) {
     this.index = index;
     this.title = title;
@@ -20,12 +32,12 @@ function Book(index, title, author, pages, read) {
         this.read = read;
     }
     this.info = function() {
-        let complete = `not yet completed!`;
-        if(this.read == true) complete =  `completed!`;
+        let complete = `not read`;
+        if(this.read == true) complete =  `read`;
         let inhtml = 
                     `<p><h2>${this.title}</h2></p>
                     <p>by - ${this.author}</p>
-                    <p>pages - ${this.pages}</p>;
+                    <p>pages - ${this.pages}</p>
                     <div>
                         <button onclick="removeCard(${this.index})">Remove</button>
                     </div>
@@ -49,6 +61,7 @@ function addBookToLibrary() {
     event.preventDefault();
     const form = document.querySelector('#fo');
     form.reset();
+    dialog.close();
 }
 
 function display() {
@@ -77,8 +90,6 @@ function removeCard (ival) {
     })
     display();
 }
-
-Object.setPrototypeOf(toggle, Book);
 
 function toggle(ival) {
     myLibrary[ival].tog();
