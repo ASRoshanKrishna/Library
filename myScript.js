@@ -15,16 +15,22 @@ function Book(index, title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.tog = function(){
+        read = !read;
+        this.read = read;
+    }
     this.info = function() {
         let complete = `not yet completed!`;
         if(this.read == true) complete =  `completed!`;
-        let str = `${this.title} by ${this.author}, ${this.pages} pages, ${complete}`;
         let inhtml = 
                     `<p><h2>${this.title}</h2></p>
                     <p>by - ${this.author}</p>
                     <p>pages - ${this.pages}</p>;
                     <div>
-                    <button onclick="removeCard(${this.index})">Remove</button>
+                        <button onclick="removeCard(${this.index})">Remove</button>
+                    </div>
+                    <div>
+                        <button onclick="toggle(${this.index})">${complete}</button>
                     </div>`;
         return inhtml;
     }
@@ -60,10 +66,22 @@ function display() {
 }
 
 function removeCard (ival) {
+    console.log(ival);
+    let a = 0;
     let rc = myLibrary[ival];
     myLibrary = myLibrary.filter(function(item) {
-        return item !== rc;
+        if(item !== rc){
+            item.index = a++; 
+            return item;
+        }
     })
+    display();
+}
+
+Object.setPrototypeOf(toggle, Book);
+
+function toggle(ival) {
+    myLibrary[ival].tog();
     display();
 }
 
