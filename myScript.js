@@ -1,14 +1,16 @@
-const myLibrary = [];
-const b1 = new Book('A', 'B', 15, true);
+let myLibrary = [];
+let index = 0;
+const b1 = new Book(index++, 'A', 'B', 15, true);
 myLibrary.push(b1);
-const b2 = new Book('s', 'd', 5, true);
+const b2 = new Book(index++, 's', 'd', 5, true);
 myLibrary.push(b2);
-const b3 = new Book('q', 'w', 1, false);
+const b3 = new Book(index++, 'q', 'w', 1, false);
 myLibrary.push(b3);
 
 const cards = document.querySelector('.cards');
 
-function Book(title, author, pages, read) {
+function Book(index, title, author, pages, read) {
+    this.index = index;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -20,7 +22,10 @@ function Book(title, author, pages, read) {
         let inhtml = 
                     `<p><h2>${this.title}</h2></p>
                     <p>by - ${this.author}</p>
-                    <p>pages - ${this.pages}</p>`;
+                    <p>pages - ${this.pages}</p>;
+                    <div>
+                    <button onclick="removeCard(${this.index})">Remove</button>
+                    </div>`;
         return inhtml;
     }
 }
@@ -31,7 +36,7 @@ function addBookToLibrary() {
     const getPages = document.querySelector('#pages');
     const getRead = document.querySelector('#read').checked;
 
-    const book = new Book(getTitle.value, getAuthor.value, getPages.value, getRead);
+    const book = new Book(index++, getTitle.value, getAuthor.value, getPages.value, getRead);
 
     myLibrary.push(book);
     display();
@@ -52,6 +57,14 @@ function display() {
         card.innerHTML += myLibrary[obj].info();
         cards.appendChild(card);
     }
+}
+
+function removeCard (ival) {
+    let rc = myLibrary[ival];
+    myLibrary = myLibrary.filter(function(item) {
+        return item !== rc;
+    })
+    display();
 }
 
 display();
