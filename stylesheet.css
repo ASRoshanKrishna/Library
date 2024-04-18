@@ -31,7 +31,7 @@ dialog{
 }
 
 dialog *{
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .one,
@@ -100,6 +100,7 @@ dialog button:hover,
 #addnew:hover,
 #del:hover,
 #switch:hover{
+    font-size: large;
     background-color: #f8fafc;
     color: #0f172a;
     border: 1px solid #f8fafc;

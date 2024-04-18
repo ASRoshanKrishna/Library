@@ -91,7 +91,7 @@ function removeCard (ival) {
             return item;
         }
     })
-    index++;
+    index = a;
     display();
 }
 
