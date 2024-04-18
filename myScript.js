@@ -1,12 +1,13 @@
 let myLibrary = [];
 let index = 0;
-const b1 = new Book(index++, 'A', 'B', 15, true);
+const b1 = new Book(index++, 'The Hobbit', 'J.R.R. Tolkien', 295, true);
 myLibrary.push(b1);
-const b2 = new Book(index++, 's', 'd', 5, true);
+const b2 = new Book(index++, 'Harry Potter', 'J. K. Rowling', 223, true);
 myLibrary.push(b2);
-const b3 = new Book(index++, 'q', 'w', 1, false);
+const b3 = new Book(index++, 'Da Vinci Code', 'Dan Brown', 689, false);
 myLibrary.push(b3);
 
+const form = document.querySelector('#fo');
 const cards = document.querySelector('.cards');
 
 const dialog = document.querySelector("dialog");
@@ -18,7 +19,9 @@ showButton.addEventListener("click", () => {
 });
 
 closeButton.addEventListener("click", () => {
-  dialog.close();
+    event.preventDefault();
+    form.reset();
+    dialog.close();
 });
 
 function Book(index, title, author, pages, read) {
@@ -32,17 +35,17 @@ function Book(index, title, author, pages, read) {
         this.read = read;
     }
     this.info = function() {
-        let complete = `not read`;
-        if(this.read == true) complete =  `read`;
+        let complete = `Not Read`;
+        if(this.read == true) complete =  `Read`;
         let inhtml = 
-                    `<p><h2>${this.title}</h2></p>
+                    `<p><h3>${this.title}</h3></p>
                     <p>by - ${this.author}</p>
                     <p>pages - ${this.pages}</p>
                     <div>
-                        <button onclick="removeCard(${this.index})">Remove</button>
+                        <button id="switch" type="button" onclick="toggle(${this.index})">${complete}</button>
                     </div>
                     <div>
-                        <button onclick="toggle(${this.index})">${complete}</button>
+                        <button id="del" type="button" onclick="removeCard(${this.index})">Remove</button>
                     </div>`;
         return inhtml;
     }
@@ -54,14 +57,15 @@ function addBookToLibrary() {
     const getPages = document.querySelector('#pages');
     const getRead = document.querySelector('#read').checked;
 
-    const book = new Book(index++, getTitle.value, getAuthor.value, getPages.value, getRead);
+    if(getTitle.value != "Book Name" && getAuthor.value != "Author Name" && getPages.value != 0){
+        const book = new Book(index++, getTitle.value, getAuthor.value, getPages.value, getRead);
 
-    myLibrary.push(book);
-    display();
-    event.preventDefault();
-    const form = document.querySelector('#fo');
-    form.reset();
-    dialog.close();
+        myLibrary.push(book);
+        display();
+        event.preventDefault();
+        form.reset();
+        dialog.close();
+    }
 }
 
 function display() {
@@ -79,7 +83,6 @@ function display() {
 }
 
 function removeCard (ival) {
-    console.log(ival);
     let a = 0;
     let rc = myLibrary[ival];
     myLibrary = myLibrary.filter(function(item) {
@@ -88,6 +91,7 @@ function removeCard (ival) {
             return item;
         }
     })
+    index++;
     display();
 }
 

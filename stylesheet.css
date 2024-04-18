@@ -8,9 +8,8 @@
     display: grid;
     grid-template-rows: 1fr 4fr;
     min-height: 100vh;
-    background-color: rgb(10, 104, 148);
-    color: aliceblue;
-    border: 2px solid orange;
+    background-color: #94a3b8;
+    color: #0f172a;
 }
 
 .header{
@@ -21,16 +20,12 @@
     font-size: xx-large;
 }
 
-#addnew{
-    border: 2px solid orange;
-}
-
 dialog{
     margin: auto;
     width: 400px;
     height: 450px;
-    background-color: rgb(23, 184, 149);
-    color: whitesmoke;
+    background-color: #f8fafc;
+    color: #0f172a;
     font-size: x-large;
     border-radius: 12px;
 }
@@ -59,50 +54,56 @@ fieldset{
 }
 
 .cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 270px);
-    justify-content: space-around;
-    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
     grid-row: 2;
 }
 
 .card{
     display: flex;
     flex-direction: column;
+    width: fit-content;
     gap: 5px;
     align-items: center;
-    margin: 12px;
+    padding: 15px 20px;
     height: 250px;
-    background-color: tomato;
-    color: whitesmoke;
+    background-color: #334155;
+    color: #f8fafc;
     font-size: x-large;
     border-radius: 12px;
 }
 
-.card:hover,
-#addnew:hover{
-    box-shadow: 3px 4px 3px rgb(200, 201, 201);
+.card:hover
+{
+    box-shadow: 3px 5px 3px whitesmoke;
 }
 
-.card div{
-    margin-top: 12px;
+.card *{
+    margin-top: 3px;
 }
 
 .card button,
 .header button,
 dialog button{
-    background-color: brown;
-    color: azure;
+    background-color:#0f172a;
+    color: #f8fafc;
+    border: 1px solid #0f172a;
     font-size: large;
-    border: 1px solid brown;
     border-radius: 10px;
     width: 150px;
     height: 30px;
 }
 
-dialog button{
-    background-color: rgb(2, 151, 119);
-    border: 1px solid rgb(2, 151, 119);
+dialog button:hover,
+#addnew:hover,
+#del:hover,
+#switch:hover{
+    background-color: #f8fafc;
+    color: #0f172a;
+    border: 1px solid #f8fafc;
+    box-shadow: 1px 3px 2px #334155;
 }
 
 .header button{
